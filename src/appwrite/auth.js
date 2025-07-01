@@ -5,7 +5,9 @@ export class AppwriteAuth {
   Client = new Client();
   account;
   constructor() {
-    this.Client.setProject(conf.appwriteProjetId);
+    this.Client
+    .setEndpoint(conf.appwriteUrl)
+    .setProject(conf.appwriteProjetId);
     this.account = new Account(this.Client);
   }
   async createAccount({ email, password, name }) {
@@ -13,7 +15,8 @@ export class AppwriteAuth {
       const userAccount = await this.account.create(
         ID.unique(),
         email,
-        password
+        password,
+        name
       );
       if (userAccount) {
         return this.login({ email, password });

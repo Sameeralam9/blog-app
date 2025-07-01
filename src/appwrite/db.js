@@ -6,9 +6,7 @@ export class dbService {
   databases;
 
   constructor() {
-    this.client
-    .setEndpoint(conf.appwriteUrl)
-    .setProject(conf.appwriteProjetId);
+    this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjetId);
     this.databases = new Databases(this.client);
   }
 
@@ -59,33 +57,28 @@ export class dbService {
       return true;
     } catch (error) {
       throw error;
-      return false;
     }
   }
   async getPosts(slug) {
     try {
-      return  await this.databases.getDocument(
-            conf.appwriteDbId,
-            conf.appwriteCollectionId,
-            slug,
-        )
+      return await this.databases.getDocument(
+        conf.appwriteDbId,
+        conf.appwriteCollectionId,
+        slug
+      );
     } catch (error) {
-        throw error;
-        return false
+      throw error;
     }
   }
-  async getPostList(){
+  async getPostList() {
     try {
-        return await this.databases.listDocuments(
-            conf.appwriteDbId,
-            conf.appwriteCollectionId,
-            [
-                Query.equal('status', 'active')
-            ]
-        )
+      return await this.databases.listDocuments(
+        conf.appwriteDbId,
+        conf.appwriteCollectionId,
+        [Query.equal("status", "active")]
+      );
     } catch (error) {
-        throw error;
-        return false;
+      throw error;
     }
   }
 }

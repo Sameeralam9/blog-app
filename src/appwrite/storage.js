@@ -15,7 +15,7 @@ export class StorageService {
       await this.Storage.createFile(conf.appwriteBucketId, ID.unique(), file);
     } catch (error) {
       throw error;
-      return false;
+      
     }
   }
 
@@ -24,7 +24,7 @@ export class StorageService {
       await this.Storage.updateFile(conf.appwriteBucketId, file.id, file);
     } catch (error) {
       throw error;
-      return false;
+      
     }
   }
 
@@ -34,7 +34,7 @@ export class StorageService {
       return true;
     } catch (error) {
       throw error;
-      return false;
+     
     }
   }
 
