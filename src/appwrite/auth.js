@@ -35,7 +35,7 @@ export class AppwriteAuth {
       throw error;
     }
   }
-  async getAccount() {
+  async getCurrentAccount() {
     try {
       return await this.account.get();
     } catch (error) {
