@@ -4,7 +4,7 @@ import authService from "./appwrite/auth";
 import { login, logout } from "./store/authslice.js";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
-
+import { useSelector } from "react-redux";
 function App() {
   const [loding, setLoding] = useState(true);
   const dispatch = useDispatch();

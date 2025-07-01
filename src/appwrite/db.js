@@ -6,7 +6,9 @@ export class dbService {
   databases;
 
   constructor() {
-    this.client.setEndpoint(conf.appwriteUrl).setProject(conf.appwriteProjetId);
+    this.client
+      .setEndpoint(conf.appwriteUrl)
+      .setProject(conf.appwriteProjectId);
     this.databases = new Databases(this.client);
   }
 
@@ -25,6 +27,7 @@ export class dbService {
         }
       );
     } catch (error) {
+      console.log("Error :: createpost", error);
       throw error;
     }
   }
@@ -43,6 +46,7 @@ export class dbService {
         }
       );
     } catch (error) {
+      console.log("Error :: updatepost", error);
       throw error;
     }
   }
@@ -56,6 +60,7 @@ export class dbService {
       );
       return true;
     } catch (error) {
+      console.log("Error :: deletepost", error);
       throw error;
     }
   }
@@ -67,6 +72,7 @@ export class dbService {
         slug
       );
     } catch (error) {
+      console.log("Error :: getposts", error);
       throw error;
     }
   }
@@ -78,6 +84,7 @@ export class dbService {
         [Query.equal("status", "active")]
       );
     } catch (error) {
+      console.log("Error :: getpostlist", error);
       throw error;
     }
   }

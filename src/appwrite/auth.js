@@ -2,13 +2,13 @@ import conf from "../conf/conf";
 import { Client, Account, ID } from "appwrite";
 
 export class AppwriteAuth {
-  Client = new Client();
+  client = new Client();
   account;
   constructor() {
-    this.Client
-    .setEndpoint(conf.appwriteUrl)
-    .setProject(conf.appwriteProjetId);
-    this.account = new Account(this.Client);
+    this.client
+      .setEndpoint(conf.appwriteUrl)
+      .setProject(conf.appwriteProjectId);
+    this.account = new Account(this.client);
   }
   async createAccount({ email, password, name }) {
     try {
@@ -24,6 +24,7 @@ export class AppwriteAuth {
         return userAccount;
       }
     } catch (error) {
+      console.log("Authentication error :: createaccount", error);
       throw error;
     }
   }
@@ -32,6 +33,7 @@ export class AppwriteAuth {
     try {
       return await this.account.createEmailPasswordSession(email, password);
     } catch (error) {
+      console.log("Authentication error :: login ::", error);
       throw error;
     }
   }
@@ -39,6 +41,7 @@ export class AppwriteAuth {
     try {
       return await this.account.get();
     } catch (error) {
+      console.log("Authentication error :: getcurrentaccount", error);
       throw error;
     }
   }
@@ -46,6 +49,7 @@ export class AppwriteAuth {
     try {
       return await this.account.deleteSessions();
     } catch (error) {
+      console.log("Authentication error :: logout", error);
       throw error;
     }
   }
