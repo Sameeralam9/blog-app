@@ -41,7 +41,7 @@ export class AppwriteAuth {
     try {
       return await this.account.get();
     } catch (error) {
-      console.log("Authentication error :: getcurrentaccount", error);
+      console.log("Authentication error :: getcurrentaccount ", error);
       throw error;
     }
   }

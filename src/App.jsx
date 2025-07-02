@@ -24,10 +24,12 @@ function App() {
   return loding ? (
     <div>Loading...</div>
   ) : (
-    <div>
-      <Header />
-      <main>Outlet</main>
-      <Footer />
+    <div className="min-h-screen flex flex-wrap content-between ">
+      <div className=" w-full block">
+        <Header />
+        <main>Outlet</main>
+        <Footer />
+      </div>
     </div>
   );
 }
