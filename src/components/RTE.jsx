@@ -1,4 +1,4 @@
-import { Editor } from "@tinymce/tinymce-react";
+import { Editor } from "tinymce";
 import { Controller } from "react-hook-form";
 
 export default function RTE({ name, control, label, defaultValue = "" }) {
