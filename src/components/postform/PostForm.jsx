@@ -7,6 +7,7 @@ import storageService from "../../appwrite/storage";
 import dbservice from "../../appwrite/db";
 
 function PostForm({ post }) {
+  console.log(post);
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
       defaultValues: {
@@ -22,7 +23,7 @@ function PostForm({ post }) {
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]
-        ? await storageService.uploadFile(data.image[0])
+        ? await storageService.createFile(data.image[0])
         : null;
 
       if (file) {
@@ -38,16 +39,19 @@ function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      const file = await storageService.uploadFile(data.image[0]);
+      const file = await storageService.createFile(data.image[0]);
 
       if (file) {
-                            const fileId = file.$id;
+        const fileId = file.$id;
         data.featuredImage = fileId;
+        console.log(fileId);
+
+        console.log("UserData inside submit:", userData);
+
         const dbPost = await dbservice.createPost({
           ...data,
           userId: userData.$id,
         });
-
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -65,7 +69,7 @@ function PostForm({ post }) {
     return "";
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "title") {
         setValue("slug", slugTransform(value.title), { shouldValidate: true });
@@ -113,7 +117,7 @@ function PostForm({ post }) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={storageService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />

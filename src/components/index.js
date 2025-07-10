@@ -8,8 +8,9 @@ import Select from "./Select";
 import RTE from "./RTE";
 import Login from "./Login";
 import Singup from "./Singup";
-import Postcard from "./PostCard";
+import PostCard from "./PostCard";
 import PostForm from "./postform/PostForm";
+import AuthLayout from "./AuthLayout";
 
 export {
   Header,
@@ -23,5 +24,6 @@ export {
   Singup,
   Login,
   PostForm,
-  Postcard,
+  PostCard,
+  AuthLayout,
 };

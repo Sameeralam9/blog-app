@@ -14,7 +14,7 @@ export class dbService {
 
   async createPost({ title, content, slug, fetuerImg, status, userId }) {
     try {
-      await this.databases.createDocument(
+      return await this.databases.createDocument(
         conf.appwriteDbId,
         conf.appwriteCollectionId,
         slug,
@@ -64,7 +64,7 @@ export class dbService {
       throw error;
     }
   }
-  async getPosts(slug) {
+  async getPost(slug) {
     try {
       return await this.databases.getDocument(
         conf.appwriteDbId,
