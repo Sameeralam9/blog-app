@@ -1,14 +1,19 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
 import authService from "../../appwrite/auth";
+import { useNavigate } from "react-router-dom";
 function LogoutBtn() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     try {
-      authService.logout().then(() => {
-        dispatch(logout());
-      });
+      authService
+        .logout()
+        .then(() => {
+          dispatch(logout());
+        })
+        .then(() => navigate("/"));
     } catch (error) {
       console.log("error in logoutbtn during logout ::", error);
     }

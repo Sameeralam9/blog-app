@@ -12,7 +12,7 @@ export class dbService {
     this.databases = new Databases(this.client);
   }
 
-  async createPost({ title, content, slug, fetuerImg, status, userId }) {
+  async createPost({ title, content, slug, featuredImage, status, userId }) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDbId,
@@ -21,7 +21,7 @@ export class dbService {
         {
           title,
           content,
-          fetuerImg,
+          featuredImage,
           status,
           userId,
         }
@@ -32,16 +32,16 @@ export class dbService {
     }
   }
 
-  async updatePost(slug, { title, content, fetuerImg, status }) {
+  async updatePost(slug, { title, content, featuredImage, status }) {
     try {
-      await this.databases.updateDocument(
+    return   await this.databases.updateDocument(
         conf.appwriteDbId,
         conf.appwriteCollectionId,
         slug,
         {
           title,
           content,
-          fetuerImg,
+          featuredImage,
           status,
         }
       );
@@ -53,12 +53,12 @@ export class dbService {
 
   async deletePost(slug) {
     try {
-      await this.databases.deleteDocument(
+   return   await this.databases.deleteDocument(
         conf.appwriteDbId,
         conf.appwriteCollectionId,
         slug
       );
-      return true;
+ 
     } catch (error) {
       console.log("Error :: deletepost", error);
       throw error;

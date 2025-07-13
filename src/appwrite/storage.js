@@ -1,5 +1,5 @@
 import conf from "../conf/conf";
-import { Client, Storage, ID } from "appwrite";
+import { Client, Storage, ID, Permission, Role } from "appwrite";
 
 export class StorageService {
   client = new Client();
@@ -17,7 +17,8 @@ export class StorageService {
       return await this.storage.createFile(
         conf.appwriteBucketId,
         ID.unique(),
-        file
+        file,
+        [Permission.read(Role.any())]
       );
     } catch (error) {
       console.log("Error :: createfile", error);
@@ -40,16 +41,15 @@ export class StorageService {
 
   async deleteFile(fileId) {
     try {
-      await this.storage.deleteFile(conf.appwriteBucketId, fileId);
-      return true;
+      return await this.storage.deleteFile(conf.appwriteBucketId, fileId);
     } catch (error) {
       console.log("Error :: deletefile", error);
       throw error;
     }
   }
 
-  getFilePreview(fileId) {
-    return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
+  getFileView(fileId) {
+    return this.storage.getFileView(conf.appwriteBucketId, fileId);
   }
 }
 

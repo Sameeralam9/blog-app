@@ -34,13 +34,14 @@ function PostForm({ post }) {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
+      console.log("dbPost", dbPost);
 
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
       const file = await storageService.createFile(data.image[0]);
-
+      console.log(file);
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
@@ -117,7 +118,7 @@ function PostForm({ post }) {
         {post && (
           <div className="w-full mb-4">
             <img
-              src={storageService.getFilePreview(post.featuredImage)}
+              src={storageService.getFileView(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
